@@ -8,18 +8,19 @@ module.exports = {
     context: path.resolve(__dirname, '..'),
     entry: {
         bundle: [
-            './client',
-            'webpack-hot-middleware/client',
+          './client',
+          'webpack-hot-middleware/client',
         ],
         vendor: [
-            'react',
-            'react-dom',
-            'redux',
-            'react-redux',
-            'react-router',
-            'react-router-redux',
-            'redux-saga',
-            'reselect'
+          'react',
+          'react-dom',
+          'redux',
+          'react-redux',
+          'react-router',
+          'react-router-redux',
+          'redux-saga',
+          'reselect',
+          'superagent'
         ]
     },
     output: {
@@ -29,14 +30,14 @@ module.exports = {
         publicPath: '/'
     },
     module: {
-        loaders: [
+      loaders: [
         {
           test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel',
           query: {
-              presets: ['es2015', 'react', 'stage-0', 'react-hmre'],
-              plugins: ['transform-runtime', 'add-module-exports']
+            presets: ['es2015', 'react', 'stage-0', 'react-hmre'],
+            plugins: ['transform-runtime', 'add-module-exports']
           }
         }, {
           test: /\.scss$/,
@@ -55,15 +56,15 @@ module.exports = {
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
         new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor', 'manifest'],
-            filename: '[name].js'
+          names: ['vendor', 'manifest'],
+          filename: '[name].js'
         }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
         new HtmlWebpackPlugin({
-            filename: '../views/dev/index.html',
-            template: './views/template/index.html'
+          filename: '../views/dev/index.html',
+          template: './views/template/index.html'
         }),
         new ProgressBarPlugin({summary: true})
     ]
