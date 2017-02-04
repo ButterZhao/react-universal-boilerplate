@@ -1,5 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     devtool: 'eval-source-map',
@@ -17,13 +19,13 @@ module.exports = {
             'react-router',
             'react-router-redux',
             'redux-saga',
-            'superagent'
+            'reselect'
         ]
     },
     output: {
         path: path.resolve(__dirname, '../dist/client'),
         filename: '[name].js',
-        // chunkFilename: 'chunk.[name].js',
+        chunkFilename: 'chunk.[name].js',
         publicPath: '/'
     },
     module: {
@@ -39,6 +41,12 @@ module.exports = {
         }, {
           test: /\.scss$/,
           loaders: ['style', 'css?module&localIdentName=[name]__[local]__[hash:base64:8]', 'sass?module']
+        }, {
+          test: /\.html$/,
+          loader: 'html?minimize=false'
+        }, {
+            test: /\.(jpg|png|gif|webp)$/,
+            loader: 'url?limit=8000'
         }]
     },
     resolve: {
@@ -46,8 +54,17 @@ module.exports = {
     },
     plugins: [
         new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor', 'manifest'],
+            filename: '[name].js'
+        }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoErrorsPlugin(),
         new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
+        new HtmlWebpackPlugin({
+            filename: '../views/dev/index.html',
+            template: './views/template/index.html'
+        }),
+        new ProgressBarPlugin({summary: true})
     ]
 }

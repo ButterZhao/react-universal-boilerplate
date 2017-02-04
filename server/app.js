@@ -9,8 +9,8 @@ import etag from 'koa-etag';
 import conditional from 'koa-conditional-get';
 const app = new Koa();
 
-app.use(conditional());
-app.use(etag());
+app.use(convert(conditional()));
+app.use(convert(etag()));
 
 app.keys = ['Excellence is a habit'];
 app.use(convert(session(app)));

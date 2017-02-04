@@ -1,6 +1,6 @@
 import React, { Component, PropTypes} from 'react';
 import { connect } from 'react-redux';
-
+import avatar from '../asset/avatar.png';
 
 class Layout extends Component {
 
@@ -14,7 +14,7 @@ class Layout extends Component {
 
     return (
       <div>
-        <header>header</header>
+        <header>header<img src={avatar}/></header>
         <section>{this.props.children}</section>
         <footer>footer</footer>
       </div>

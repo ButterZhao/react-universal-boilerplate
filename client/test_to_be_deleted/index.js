@@ -2,8 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import { testAction } from './action.js';
+import { testAction } from './action';
 import * as style from './test.scss';
+import textSelector from './selector';
 
 class Test extends Component {
   componentWillMount() {
@@ -15,9 +16,16 @@ class Test extends Component {
   }
 
   render(){
+    const { text } = this.props;
+    const li = text.map(t => {
+      return (<li key={t.id}>{t.text}</li>)
+    })
+
     return (
       <div className={style.test}>
-        <h1>{this.props.text}</h1>
+        <ul>
+          {li}
+        </ul>
         <button onClick={this.handleClick.bind(this)}>Click</button>
       </div>
 
@@ -29,7 +37,7 @@ class Test extends Component {
 export default connect(
   state => {
     return {
-      text: state.test.text
+      text: textSelector(state)
     }
   }
 )(Test);
