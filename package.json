@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development nodemon ./server/server.dev.js --watch server --watch build --watch config ",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./build/webpack.prd.config.js --progress",
     "clean": "rimraf ./dist/client/* && rimraf ./dist/server/* && rimraf ./views/prd/*",
-    "start": "pm2 ./dist/server/server.js -i max",
+    "start": "pm2 ./dist/server/server.js -i max"
   },
   "keywords": [
     "zhongan",
