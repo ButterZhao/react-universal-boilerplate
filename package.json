@@ -8,7 +8,11 @@
     "dev": "cross-env NODE_ENV=development nodemon ./server/server.dev.js --watch server --watch build --watch config ",
     "build": "npm run clean && cross-env NODE_ENV=production webpack --config ./build/webpack.prd.config.js --progress",
     "clean": "rimraf ./dist/client/* && rimraf ./dist/server/* && rimraf ./views/prd/*",
-    "start": "pm2 start ./dist/server/server.js -i max",
+    "start": "node ./dist/server/server.js",
+    "pm2st": "pm2 start ./dist/server/server.js -i max --name quickpay",
+    "pm2rs": "pm2 restart quickpay",
+    "pm2stop": "pm2 stop quickpay",
+    "pm2rl": "pm2 reload quickpay",
     "lint": "./node_modules/.bin/eslint . --ext .js"
   },
   "keywords": [
