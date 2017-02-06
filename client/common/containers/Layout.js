@@ -1,25 +1,18 @@
-import React, { Component, PropTypes} from 'react';
-import { connect } from 'react-redux';
+import React, { PropTypes } from 'react';
 import avatar from '../asset/avatar.png';
 
-class Layout extends Component {
+const Layout = props => (
+  <div>
+    <header>
+      header<img alt='' src={avatar} />
+    </header>
+    <section>{props.children}</section>
+    <footer>footer</footer>
+  </div>
+);
 
-  componentWillMount() {
-  }
-
-  componentDidMount() {
-  }
-
-  render() {
-
-    return (
-      <div>
-        <header>header<img src={avatar}/></header>
-        <section>{this.props.children}</section>
-        <footer>footer</footer>
-      </div>
-    )
-  }
-}
+Layout.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Layout;

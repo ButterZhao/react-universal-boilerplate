@@ -1,6 +1,6 @@
-import { applyMiddleware, createStore, compose } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { routerMiddleware} from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 
 import { history } from '../services';
 import reducers from '../reducers';
@@ -17,4 +17,4 @@ export default (state) => {
   sagaMiddleware.run(rootSaga);
 
   return store;
-}
+};

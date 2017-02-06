@@ -1,11 +1,11 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
-const text = state => state.test.text ;
+const text = state => state.test.text;
 
 export default createSelector(
   text,
-  (text) => {
-    const t = text.filter( t => t.complete )
-    return t;
+  (txt) => {
+    const ts = txt.filter(t => t.complete);
+    return ts;
   }
 );

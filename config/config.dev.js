@@ -1,3 +1,4 @@
+/* eslint-disable */
 const LOCAL_HOST = 'localhost';
 const LOCAL_PORT = process.env.port || 3000
 

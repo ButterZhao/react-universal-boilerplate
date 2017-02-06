@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routerReducer, LOCATION_CHANGE } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 
 import test from '../../test_to_be_deleted/reducer';
 

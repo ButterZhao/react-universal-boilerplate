@@ -5,19 +5,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
-let clientConfig, serverConfig;
-
 function getExternals() {
-    return fs.readdirSync(path.resolve(__dirname, '../node_modules'))
-        .filter(filename => !filename.includes('.bin'))
-        .reduce((externals, filename) => {
-            externals[filename] = `commonjs ${filename}`
-
-            return externals
-        }, {})
+  return fs.readdirSync(path.resolve(__dirname, '../node_modules'))
+    .filter(filename => !filename.includes('.bin'))
+    .reduce((externals, filename) => {
+      externals[filename] = `commonjs ${filename}`;
+      return externals;
+    }, {});
 }
 
-clientConfig = {
+const clientConfig = {
   context: path.resolve(__dirname, '..'),
   entry: {
     bundle: './client',
@@ -59,8 +56,8 @@ clientConfig = {
       loader: 'html?minimize=false'
     }]
   },
-  postcss: [autoprefixer({browsers: ['> 5%']})],
-  resolve: {extensions: ['', '.js', '.json', '.scss']},
+  postcss: [autoprefixer({ browsers: ['> 5%'] })],
+  resolve: { extensions: ['', '.js', '.json', '.scss'] },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
@@ -69,20 +66,20 @@ clientConfig = {
       filename: '[name].[chunkhash:8].js'
     }),
     new webpack.optimize.UglifyJsPlugin({
-      compress: {warnings: false},
+      compress: { warnings: false },
       comments: false
     }),
-    new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)}),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) }),
     new HtmlWebpackPlugin({
       filename: '../../views/prd/index.html',
       template: './views/template/index.html',
       chunksSortMode: 'none'
     }),
-    new ExtractTextPlugin('[name].[contenthash:8].css', {allChunks: true})
+    new ExtractTextPlugin('[name].[contenthash:8].css', { allChunks: true })
   ]
-}
+};
 
-serverConfig = {
+const serverConfig = {
   context: path.resolve(__dirname, '..'),
   entry: {
     server: './server/server.prd'
@@ -118,16 +115,16 @@ serverConfig = {
     }]
   },
   externals: getExternals(),
-  resolve: {extensions: ['', '.js', '.json', '.scss']},
+  resolve: { extensions: ['', '.js', '.json', '.scss'] },
   plugins: [
-      new webpack.optimize.OccurrenceOrderPlugin(),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-          compress: {warnings: false},
-          comments: false
-      }),
-      new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)})
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.DedupePlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false },
+      comments: false
+    }),
+    new webpack.DefinePlugin({ 'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV) })
   ]
-}
+};
 
-module.exports = [clientConfig, serverConfig]
+module.exports = [clientConfig, serverConfig];

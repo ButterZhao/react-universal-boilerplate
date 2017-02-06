@@ -7,6 +7,11 @@ import * as style from './test.scss';
 import textSelector from './selector';
 
 class Test extends Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   componentWillMount() {
     this.props.dispatch(testAction());
   }
@@ -15,29 +20,28 @@ class Test extends Component {
     this.props.dispatch(push('/test1'));
   }
 
-  render(){
+  render() {
     const { text } = this.props;
-    const li = text.map(t => {
-      return (<li key={t.id}>{t.text}</li>)
-    })
+    const li = text.map(t => (<li key={t.id}>{t.text}</li>));
 
     return (
       <div className={style.test}>
         <ul>
           {li}
         </ul>
-        <button onClick={this.handleClick.bind(this)}>Click</button>
+        <button onClick={this.handleClick}>Click</button>
       </div>
-
-
-    )
+    );
   }
 }
 
+Test.propTypes = {
+  text: PropTypes.arrayOf(PropTypes.object).isRequired,
+  dispatch: PropTypes.func.isRequired
+};
+
 export default connect(
-  state => {
-    return {
-      text: textSelector(state)
-    }
-  }
+  state => ({
+    text: textSelector(state)
+  })
 )(Test);

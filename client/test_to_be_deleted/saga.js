@@ -4,16 +4,16 @@ import { sagaAction } from './action';
 import { ACTION_TEST } from './constants';
 import { getTestData } from './service';
 
-function* test (action){
-  try{
+function* test() {
+  try {
     const data = yield call(getTestData);
     yield put(sagaAction(data));
-  }catch(e) {
-    console.log(e);
+  } catch (e) {
+    // console.log(e);
   }
 }
 
-export function* testSaga (action){
+export default function* testSaga() {
   yield [
     takeLatest(ACTION_TEST, test)
   ];

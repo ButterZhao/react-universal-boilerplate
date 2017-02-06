@@ -1,21 +1,23 @@
+/* eslint-disable */
+
 import React, { Component, PropTypes } from 'react';
 
-import DevTools from './DevTools'
-import Layout from './layout';
+import DevTools from './DevTools.dev';
+import Layout from './Layout';
 
 class Root extends Component {
   constructor() {
-    super()
-    this.state = { isMounted: false }
+    super();
+    this.state = { isMounted: false };
   }
 
   componentDidMount() {
-    /**********************************************************************************************************/
-    /***if you haven't install redux plugin in chrome, you could uncommit above line to active the dev tool****/
-    /***           you also need to uncommit line 'DevTools.instrument()' in storeCreator.dev.js            ***/
-    /**********************************************************************************************************/
+    /**                                                                                 **/
+    /**              if you haven't install redux plugin in chrome                      **/
+    /**           you could uncommit above line to active the dev tool                  **/
+    /**  you also need to uncommit line 'DevTools.instrument()' in storeCreator.dev.js ***/
+    /**                                                                                 **/
     // this.setState({ isMounted: true })
-    // console.log('Redux Devtools is now available. Press key "ctrl-i" to toggleVisibility. Press key "ctrl-m" to changePosition.')
   }
 
   render() {
@@ -23,10 +25,14 @@ class Root extends Component {
     return (
       <div>
         <Layout>{this.props.children}</Layout>
-        {isMounted && <DevTools/>}
+        {isMounted && <DevTools />}
       </div>
-    )
+    );
   }
 }
+
+Root.propTypes = {
+  children: PropTypes.node.isRequired
+};
 
 export default Root;

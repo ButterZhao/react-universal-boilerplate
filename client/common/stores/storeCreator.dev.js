@@ -1,14 +1,16 @@
+/* eslint-disable */
+
 import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { routerMiddleware} from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 
 import { history } from '../services';
 import reducers from '../reducers';
 import rootSaga from '../sagas';
-import DevTools from '../containers/DevTools'
+// import DevTools from '../containers/DevTools'
 
 export default (state) => {
-  const composeEnhancers = (typeof window==='object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+  const composeEnhancers = (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
   const _routerMiddleware = routerMiddleware(history);
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(

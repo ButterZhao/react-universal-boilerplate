@@ -1,9 +1,9 @@
-import { takeLatest, fork } from 'redux-saga/effects';
+import { fork } from 'redux-saga/effects';
 
-import {testSaga} from '../../test_to_be_deleted/saga';
+import testSaga from '../../test_to_be_deleted/saga';
 
-export default function*() {
+export default function* () {
   yield [
     fork(testSaga)
-  ]
+  ];
 }

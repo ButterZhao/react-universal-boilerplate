@@ -1,24 +1,26 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { testAction } from './action.js';
+import { testAction } from './action';
 
 class Test extends Component {
   componentWillMount() {
     this.props.dispatch(testAction());
   }
 
-  render(){
+  render() {
     return (
       <h1>Hello Kathy</h1>
-    )
+    );
   }
 }
 
+Test.propTypes = {
+  dispatch: PropTypes.func.isRequired
+};
+
 export default connect(
-  state => {
-    return {
-      text: state.test.text
-    }
-  }
+  state => ({
+    text: state.test.text
+  })
 )(Test);
