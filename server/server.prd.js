@@ -1,3 +1,5 @@
+// node server for production
+
 import 'babel-polyfill';
 import serve from 'koa-static';
 import path from 'path';

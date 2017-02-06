@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const fs = require('fs');
 
+// when we compile node code, the code under node_modules is not necessary
 function getExternals() {
   return fs.readdirSync(path.resolve(__dirname, '../node_modules'))
     .filter(filename => !filename.includes('.bin'))
@@ -14,6 +15,7 @@ function getExternals() {
     }, {});
 }
 
+// for the static client part, all these could be uploaded into CDN
 const clientConfig = {
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -47,6 +49,7 @@ const clientConfig = {
       }
     }, {
       test: /\.scss$/,
+      // ExtractTextPlugin will extract css code from bundle into a sepreate file
       loader: ExtractTextPlugin.extract('style', 'css?modules&camelCase&importLoaders=1&localIdentName=[hash:base64:8]!postcss!sass')
     }, {
       test: /\.(jpg|png|gif|webp)$/,
@@ -56,6 +59,7 @@ const clientConfig = {
       loader: 'html?minimize=false'
     }]
   },
+  // autoprefixer will add browsers' prefix before css class automatically
   postcss: [autoprefixer({ browsers: ['> 5%'] })],
   resolve: { extensions: ['', '.js', '.json', '.scss'] },
   plugins: [
@@ -79,6 +83,7 @@ const clientConfig = {
   ]
 };
 
+// for node code part
 const serverConfig = {
   context: path.resolve(__dirname, '..'),
   entry: {
@@ -95,6 +100,8 @@ const serverConfig = {
     __dirname: true
   },
   module: {
+    // since react code need to be rendered from server side,
+    // we still need to add the loaders for the react part
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
@@ -114,7 +121,7 @@ const serverConfig = {
       loader: 'url?limit=8000'
     }]
   },
-  externals: getExternals(),
+  externals: getExternals(), // exclude the /node_modules
   resolve: { extensions: ['', '.js', '.json', '.scss'] },
   plugins: [
     new webpack.optimize.OccurrenceOrderPlugin(),

@@ -1,11 +1,17 @@
 /* eslint-disable */
+// node server, for dev env
+
+// for babel compile
 require('babel-polyfill');
 
+// for hot module reload, below 3 hooks are necessary when server start
+// babel hook
 require('babel-register')({
     presets: ['es2015', 'react', 'stage-0'],
     plugins: ['add-module-exports']
 });
 
+// scss compiler hook
 require('css-modules-require-hook')({
     extensions: ['.scss'],
     preprocessCss: (data, filename) =>
@@ -17,6 +23,7 @@ require('css-modules-require-hook')({
     generateScopedName: '[name]__[local]__[hash:base64:8]'
 });
 
+// image compiler hook
 require('asset-require-hook')({
     extensions: ['jpg', 'png', 'gif', 'webp'],
     limit: 8000
@@ -37,6 +44,8 @@ const views = require('koa-views');
 const path = require('path');
 const fs = require('fs');
 
+// for hot module reload, we need to generate the html
+// according to html template at first of server starting
 compiler.plugin('emit', (compilation, callback) => {
     const assets = compilation.assets;
     let file, data;
@@ -51,15 +60,22 @@ compiler.plugin('emit', (compilation, callback) => {
     callback();
 })
 
+// use html template
 app.use(views(path.resolve(__dirname, '../views/dev'), {map: {html: 'ejs'}}));
+
+// client & server routers
 app.use(clientRoute);
 app.use(router.routes());
 app.use(router.allowedMethods());
+
 console.log(`\n==>   Listening on port ${port}. Open up http://localhost:${port}/ in your browser.\n`);
+
+// hot module reload middlewares
 app.use(convert(devMiddleware(compiler, {
     // noInfo: true,
     publicPath: webpackCfg.output.publicPath
 })));
 app.use(convert(hotMiddleware(compiler)));
 
+// start server
 app.listen(port);

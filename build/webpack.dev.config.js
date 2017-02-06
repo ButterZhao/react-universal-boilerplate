@@ -9,8 +9,10 @@ module.exports = {
   entry: {
     bundle: [
       './client',
-      'webpack-hot-middleware/client'
+      'webpack-hot-middleware/client' // hot module reload
     ],
+
+    // for third-party lib
     vendor: [
       'react',
       'react-dom',
@@ -55,7 +57,11 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
+
+    // for common code
     new webpack.optimize.CommonsChunkPlugin({
+      // manifest will record all the hash code for vendor
+      // so that the hash code for vendor will not be changed
       names: ['vendor', 'manifest'],
       filename: '[name].js'
     }),

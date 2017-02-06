@@ -1,4 +1,7 @@
+// wrap superagent, it provide easy implementation for service
+
 import request from 'superagent';
+
 import config from '../../config';
 
 function ajax(options) {
@@ -19,6 +22,8 @@ function ajax(options) {
   }
 
   const promise = request[options.type](options.url).withCredentials();
+
+  // set superagent request header
   Object.keys(options).forEach((key) => {
     if (!key.match(/url|type|data/)) {
       promise.set(key, options[key]);

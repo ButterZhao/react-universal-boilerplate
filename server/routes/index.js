@@ -1,3 +1,5 @@
+// load all the node router, it should NOT be modified
+
 import fs from 'fs';
 import path from 'path';
 import Router from 'koa-router';

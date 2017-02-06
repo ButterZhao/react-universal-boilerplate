@@ -1,3 +1,5 @@
+// web route for server side, since the react will be rendered by server side
+
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';

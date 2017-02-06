@@ -1,4 +1,5 @@
 /* eslint-disable */
+// add Devtool into the app layout for dev env.
 
 import React, { Component, PropTypes } from 'react';
 

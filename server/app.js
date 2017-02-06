@@ -1,3 +1,5 @@
+// KOA related middleware.
+
 import Koa from 'koa';
 import json from 'koa-json';
 import bodyParser from 'koa-bodyparser';

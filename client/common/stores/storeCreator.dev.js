@@ -1,5 +1,8 @@
 /* eslint-disable */
 
+// Store Creator for Dev ENV
+// it will use redux, redux-saga, react-router, react-router-redux
+
 import { applyMiddleware, createStore, compose } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { routerMiddleware } from 'react-router-redux';
@@ -10,8 +13,13 @@ import rootSaga from '../sagas';
 // import DevTools from '../containers/DevTools'
 
 export default (state) => {
+  // below code will add redux dev tool into our app
   const composeEnhancers = (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
+
+  // use react-router-redux wrap react-router
   const _routerMiddleware = routerMiddleware(history);
+
+  // user redux-saga
   const sagaMiddleware = createSagaMiddleware();
   const store = createStore(
     reducers,
@@ -37,6 +45,7 @@ export default (state) => {
 
   sagaMiddleware.run(rootSaga);
 
+  // for hot module reload
   if (module.hot) {
     module.hot.accept('../reducers', () => {
       const nextReducers = require('../reducers');

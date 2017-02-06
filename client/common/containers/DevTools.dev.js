@@ -1,5 +1,5 @@
 /* eslint-disable */
-
+// Redux Devtool, will only be used at NODE_ENV NOT equals to "production"
 import React from 'react';
 import { createDevTools } from 'redux-devtools';
 import LogMonitor from 'redux-devtools-log-monitor';
