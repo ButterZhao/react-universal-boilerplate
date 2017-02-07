@@ -4,8 +4,13 @@ import request from 'superagent';
 
 import config from '../../config';
 
+// this will be the config name of different service server
+// eg: JAVA, means the data come from JAVA server
+const JAVA = config.Service.domain; // TODO rename
+
 function ajax(options) {
   const defaults = {
+    host: JAVA,
     url: null,
     type: 'post',
     data: {},
@@ -14,14 +19,8 @@ function ajax(options) {
 
   options = Object.assign({}, defaults, options);
 
-  // server render first screen
-  // domain is required for node http request
-  const isNode = typeof window === 'undefined';
-  if (isNode) {
-    options.url = config.Local.domain + options.url;
-  }
-
-  const promise = request[options.type](options.url).withCredentials();
+  const url = options.host + options.url;
+  const promise = request[options.type](url).withCredentials();
 
   // set superagent request header
   Object.keys(options).forEach((key) => {
