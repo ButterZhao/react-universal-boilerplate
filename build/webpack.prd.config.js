@@ -36,7 +36,7 @@ const clientConfig = {
     path: path.resolve(__dirname, '../dist/client'),
     filename: '[name].[chunkhash:8].js',
     chunkFilename: 'chunk.[name].[chunkhash:8].js',
-    publicPath: '/'
+    publicPath: '/'   // TODO repleace it with your cdn address, like: 'http://cdn.com/'
   },
   module: {
     loaders: [{
