@@ -1,7 +1,7 @@
 {
-  "name": "quickpay",
+  "name": "boilerplate",
   "version": "1.0.0",
-  "description": "zhonganquickpay",
+  "description": "boilerplate",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,12 +18,12 @@
     "mock": "json-server --watch ./server/shared/mockDB.json --port 3004"
   },
   "keywords": [
-    "zhongan",
-    "quickpay",
-    "flight",
-    "ticket"
+    "boilerplate",
+    "react",
+    "redux",
+    "react-redux"
   ],
-  "author": "zhongan - Robin",
+  "author": "Robin",
   "license": "ISC",
   "devDependencies": {
     "asset-require-hook": "^1.0.2",
