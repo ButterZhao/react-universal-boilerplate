@@ -3,11 +3,11 @@
 import { combineReducers } from 'redux';
 import { routerReducer } from 'react-router-redux';
 
-import test from '../../test_to_be_deleted/reducer';// TODO this should be deleted, since it is for test
+import todoApp from '../../TodoList/reducers';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  test   // TODO this should be deleted, since it is for test
+  todoApp   // TODO this should be deleted, since it is for test
 });
 
 export default rootReducer;

@@ -1,6 +1,6 @@
 /* eslint-disable */
 const LOCAL_HOST = '127.0.0.1';
-const LOCAL_PORT = process.env.port || 3000;
+const LOCAL_PORT = process.env.port || 3010;
 const SERV_HOST = '127.0.0.1';
 const SERV_PORT = 3004;
 
