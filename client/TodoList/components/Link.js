@@ -1,8 +1,9 @@
 import React, { PropTypes } from 'react';
 
-const Link = ({ active, children, onClick }) => {
-  if (active) {
-    return <span>{children}</span>;
+const Link = (a) => {
+  // console.log(a);
+  if (a.active) {
+    return <span>{a.children}</span>;
   }
 
   return (
@@ -10,10 +11,10 @@ const Link = ({ active, children, onClick }) => {
       href=''
       onClick={(e) => {
         e.preventDefault();
-        onClick();
+        a.onClick();
       }}
     >
-      {children}
+      {a.children}
     </a>
   );
 };
